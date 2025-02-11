@@ -1,0 +1,43 @@
+name: Reproduce Issue
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Install dependencies
+        run: |
+          npm install --global @salesforce/cli
+      - name: Authenticate DevHub and create scratch org
+        env:
+          SFDX_AUTH_URL_DEVHUB: ${{ secrets.SFDX_AUTH_URL_DEVHUB }}
+        run: |
+          echo "${SFDX_AUTH_URL_DEVHUB}" | sf org login sfdx-url --set-default-dev-hub --sfdx-url-stdin
+          ./scripts/develop.sh
+      - name: Run test for SObject API
+        run: |
+          ./scripts/test.sh
+      - name: Run test for Tooling API
+        run: |
+          if ./scripts/test-tooling.sh; then
+            echo "expected test to fail but it didn't"
+            exit 1
+          else
+            echo "test failed as expected"
+          fi
+      - name: Delete scratch org
+        if: always()
+        run: |
+          sf org delete scratch --no-prompt
