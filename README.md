@@ -1,15 +1,15 @@
-# mre-tooling-composite-delete
+# MRE Tooling Composite Delete
 
-> Minimal working example to demonstrate a bug in the Tooling Composite API where deleting Tooling API records does not work.
+> Minimal example demonstrating a bug in the Tooling Composite API where deleting Tooling API records fails.
 
 [![Actions Status](https://github.com/mdapi-issues/mre-tooling-composite-delete/actions/workflows/default.yml/badge.svg?branch=main)](https://github.com/mdapi-issues/mre-tooling-composite-delete/actions?query=branch:main)
 
 > [!IMPORTANT]
-> A green status badge means the issue was successfully reproduced.
+> A green status badge indicates that the issue was successfully reproduced.
 >
 > A red status badge means the issue was fixed or the pipeline failed for another reason.
 
-It's not possible to delete multiple Tooling API records although it is documented here:
+It is not possible to delete multiple Tooling API records, although this is documented here:
 
 https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/tooling_resources_composite_sobjects_collections_delete.htm
 
@@ -24,13 +24,13 @@ Error:
 
 ![Delete Flow Error](https://github.com/user-attachments/assets/d52bc263-ffe5-4c1f-96be-fd7f08c459fb)
 
-For regular SObjects, this works just fine.
+For regular SObjects, this process works fine.
 
 https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_composite_sobjects_collections_delete.htm
 
 ## Reproduction
 
-Create two SourceMember Tooling API records and try to delete them in a composite request:
+Create two SourceMember Tooling API records and attempt to delete them in a composite request:
 
 ```shell
 sf data record create --use-tooling-api --sobject SourceMember --values "MemberType='FakeType' MemberName='Fake1'"
