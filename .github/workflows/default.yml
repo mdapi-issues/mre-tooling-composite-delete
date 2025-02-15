@@ -37,6 +37,14 @@ jobs:
           else
             echo "test failed as expected"
           fi
+      - name: Test deleting Flows via SObject Composite API
+        run: |
+          if ./scripts/test-flow.sh; then
+            echo "expected test to fail but it didn't"
+            exit 1
+          else
+            echo "test failed as expected"
+          fi
       - name: Delete scratch org
         if: always()
         run: |
