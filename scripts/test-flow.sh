@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-trap cleanupSequentially EXIT
+trap cleanupSequentially ERR
 
 getIds() {
     sf data query \
