@@ -34,6 +34,8 @@ For regular SObjects (e.g. `Account`, `Contact`,...) this process works fine usi
 +/services/data/v63.0/composite/sobjects
 ```
 
+![Listing API resources](https://github.com/user-attachments/assets/c83438f0-5b36-42ca-a104-b091f015a9ea)
+
 https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_composite_sobjects_collections_delete.htm
 
 ## Reproduction
