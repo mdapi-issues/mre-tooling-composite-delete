@@ -45,6 +45,9 @@ jobs:
           else
             echo "test failed as expected"
           fi
+      - name: Test deleting Flows via Composite Resource Collection of Tooling API
+        run: |
+          ./scripts/test-flow-workaround.sh
       - name: Delete scratch org
         if: always()
         run: |
