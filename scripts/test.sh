@@ -32,4 +32,4 @@ ids="$(getIds)"
 idsCommaSeparated="$(echo "${ids}" | paste -sd "," -)" # comma join ids
 
 set -x
-sf api request rest --method DELETE --include --body "formdata" "/services/data/v62.0/composite/sobjects?allOrNone=true&ids=${idsCommaSeparated}"
+sf api request rest --method DELETE --include --body "formdata" "/services/data/v63.0/composite/sobjects?allOrNone=true&ids=${idsCommaSeparated}"

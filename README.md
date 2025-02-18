@@ -9,7 +9,7 @@
 >
 > A red status badge means the issue was fixed or the pipeline failed for another reason.
 
-It is not possible to delete multiple records of [Tooling API Objects](https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/reference_objects_list.htm) (e.g. `Flow`, `SourceMember`,...) via `/services/data/v62.0/tooling/composite/sobjects` although this is documented here:
+It is not possible to delete multiple records of [Tooling API Objects](https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/reference_objects_list.htm) (e.g. `Flow`, `SourceMember`,...) via `/services/data/v63.0/tooling/composite/sobjects` although this is documented here:
 
 https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/tooling_resources_composite_sobjects_collections_delete.htm
 
@@ -24,14 +24,14 @@ Error:
 
 ![Delete Flow Error](https://github.com/user-attachments/assets/d52bc263-ffe5-4c1f-96be-fd7f08c459fb)
 
-For regular SObjects (e.g. `Account`, `Contact`,...) this process works fine using `/services/data/v62.0/composite/sobjects`:
+For regular SObjects (e.g. `Account`, `Contact`,...) this process works fine using `/services/data/v63.0/composite/sobjects`:
 
 > [!NOTE]
 > Mind the slightly different endpoint for Tooling API vs REST API:
 
 ```diff
--/services/data/v62.0/tooling/composite/sobjects
-+/services/data/v62.0/composite/sobjects
+-/services/data/v63.0/tooling/composite/sobjects
++/services/data/v63.0/composite/sobjects
 ```
 
 https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_composite_sobjects_collections_delete.htm
@@ -44,7 +44,7 @@ Create two SourceMember Tooling API records and attempt to delete them in a comp
 sf data record create --use-tooling-api --sobject SourceMember --values "MemberType='FakeType' MemberName='Fake1'"
 sf data record create --use-tooling-api --sobject SourceMember --values "MemberType='FakeType' MemberName='Fake2'"
 idsCommaSeparated="$(sf data query --use-tooling-api --query "SELECT Id FROM SourceMember WHERE MemberType='FakeType'" --result-format csv | tail -n +2 | paste -sd "," -)"
-sf api request rest --method DELETE --body "formdata" "/services/data/v62.0/tooling/composite/sobjects?allOrNone=true&ids=${idsCommaSeparated}"
+sf api request rest --method DELETE --body "formdata" "/services/data/v63.0/tooling/composite/sobjects?allOrNone=true&ids=${idsCommaSeparated}"
 ```
 
 Output:

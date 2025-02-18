@@ -33,7 +33,7 @@ ids="$(getIds)"
 idsCommaSeparated="$(echo "${ids}" | paste -sd "," -)" # comma join ids
 
 set -x
-result="$(sf api request rest --method DELETE --body "formdata" "/services/data/v62.0/composite/sobjects?allOrNone=true&ids=${idsCommaSeparated}")"
+result="$(sf api request rest --method DELETE --body "formdata" "/services/data/v63.0/composite/sobjects?allOrNone=true&ids=${idsCommaSeparated}")"
 set +x
 failed="$(node -pe 'JSON.parse(fs.readFileSync(0, "utf8")).some(r => !r.success)' < <(echo "${result}"))"
 if [[ "${failed}" == "true" ]]; then
