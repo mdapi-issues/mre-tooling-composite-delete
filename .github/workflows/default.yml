@@ -19,7 +19,7 @@ jobs:
           node-version-file: .node-version
       - name: Install dependencies
         run: |
-          npm install --global @salesforce/cli
+          npm install --ignore-scripts --global @salesforce/cli
       - name: Authenticate DevHub and create scratch org
         env:
           SFDX_AUTH_URL_DEVHUB: ${{ secrets.SFDX_AUTH_URL_DEVHUB }}
